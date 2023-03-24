@@ -1,0 +1,108 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="15.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{C42215CE-951E-45A4-A9FB-E10DCCEA0517}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ScienceFair2008</RootNamespace>
+    <AssemblyName>ScienceFair2008</AssemblyName>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>2.0</OldToolsVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="FlickrNet, Version=2.1.5.19851, Culture=neutral, PublicKeyToken=2491df59efa5d132">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\WINDOWS\Microsoft.NET\FlickrNet\FlickrNet.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.DirectX.DirectInput, Version=1.0.2902.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
+    <Reference Include="NNBase, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\BackPropMLP\bin\Debug\NNBase.dll</HintPath>
+    </Reference>
+    <Reference Include="Sharp3D.Math, Version=1.1.1621.25559, Culture=neutral, PublicKeyToken=529e2e82fcc0ba71">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Totem\Code\Totem\Totem.CameraSystem\bin\Debug\Sharp3D.Math.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Tao.OpenGl, Version=0.0.0.0, Culture=neutral, PublicKeyToken=1ca010269a4501ef" />
+    <Reference Include="Totem, Version=0.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Totem\Code\Totem\Totem\bin\Debug\Totem.dll</HintPath>
+    </Reference>
+    <Reference Include="Totem.CameraSystem, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Totem\Code\Totem\Totem.CameraSystem\bin\Debug\Totem.CameraSystem.dll</HintPath>
+    </Reference>
+    <Reference Include="Totem.InputSystem, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Totem\Code\Totem\Totem.InputSystem\bin\Debug\Totem.InputSystem.dll</HintPath>
+    </Reference>
+    <Reference Include="Totem.PluginSystem, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Totem\Code\Totem\Totem.PluginSystem\bin\Debug\Totem.PluginSystem.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="MNIST\AutoencoderBasedDiscrimination.cs" />
+    <Compile Include="MNIST\AutoencoderInputProvider.cs" />
+    <Compile Include="MNIST\AutoencoderToMLP.cs" />
+    <Compile Include="MNIST\DiscriminativeInputProvider.cs" />
+    <Compile Include="MNIST\DiscriminativeMLP.cs" />
+    <Compile Include="MNIST\DiscriminativeProgramBase.cs" />
+    <Compile Include="Flickr\FlickrAutoencoder.cs" />
+    <Compile Include="Flickr\FlickrInputProvider.cs" />
+    <Compile Include="MNIST\GenerativeAutoencoder.cs" />
+    <Compile Include="MNIST\GenerativeInputProvider.cs" />
+    <Compile Include="MNIST\LabelReader.cs" />
+    <Compile Include="MNIST\MNISTAutoencoderCompress.cs" />
+    <Compile Include="MNIST\MNISTCamera.cs" />
+    <Compile Include="MNIST\MNISTInputProvider.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="MNIST\MNISTProgramBase.cs" />
+    <Compile Include="ProgramBase.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BackPropMLP2\NeuralNetwork.csproj">
+      <Project>{880633F9-F905-4656-8A88-19870A50A174}</Project>
+      <Name>NeuralNetwork</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

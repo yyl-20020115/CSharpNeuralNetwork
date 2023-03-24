@@ -1,0 +1,42 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <OutputType>Exe</OutputType>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\src\SharpLearning.Common.Interfaces\SharpLearning.Common.Interfaces.csproj" />
+    <ProjectReference Include="..\src\SharpLearning.Containers\SharpLearning.Containers.csproj" />
+    <ProjectReference Include="..\src\SharpLearning.CrossValidation\SharpLearning.CrossValidation.csproj" />
+    <ProjectReference Include="..\src\SharpLearning.DecisionTrees\SharpLearning.DecisionTrees.csproj" />
+    <ProjectReference Include="..\src\SharpLearning.InputOutput\SharpLearning.InputOutput.csproj" />
+    <ProjectReference Include="..\src\SharpLearning.Metrics\SharpLearning.Metrics.csproj" />
+    <ProjectReference Include="..\src\SharpLearning.Optimization\SharpLearning.Optimization.csproj" />
+    <ProjectReference Include="..\src\SharpLearning.RandomForest\SharpLearning.RandomForest.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="Resources\Glass.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
+    <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
+    <PackageReference Include="Microsoft.DotNet.UpgradeAssistant.Extensions.Default.Analyzers" Version="0.4.410601">
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+  </ItemGroup>
+</Project>

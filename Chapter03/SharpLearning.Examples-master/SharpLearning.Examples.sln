@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.2037
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpLearning.Examples", "src\SharpLearning.Examples.csproj", "{D730F7CD-AAA3-4702-9A23-16435A7944D3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WhiteWineTesting", "WhiteWineTesting\WhiteWineTesting.csproj", "{B13C0895-11B8-4C9D-9DF3-E639A99C097A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D730F7CD-AAA3-4702-9A23-16435A7944D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D730F7CD-AAA3-4702-9A23-16435A7944D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D730F7CD-AAA3-4702-9A23-16435A7944D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D730F7CD-AAA3-4702-9A23-16435A7944D3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B13C0895-11B8-4C9D-9DF3-E639A99C097A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B13C0895-11B8-4C9D-9DF3-E639A99C097A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B13C0895-11B8-4C9D-9DF3-E639A99C097A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B13C0895-11B8-4C9D-9DF3-E639A99C097A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4CB9B262-ADC2-48E3-9BF0-F3602990CB42}
+	EndGlobalSection
+EndGlobal

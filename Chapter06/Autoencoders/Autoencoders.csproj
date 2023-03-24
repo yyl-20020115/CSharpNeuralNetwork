@@ -1,0 +1,73 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <OutputType>Library</OutputType>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="Backup\Autoencoder.cs" />
+    <Compile Remove="Backup\AutoencoderBuilder.cs" />
+    <Compile Remove="Backup\AutoencoderLearningRate.cs" />
+    <Compile Remove="Backup\AutoencoderWeights.cs" />
+    <Compile Remove="Backup\GaussianWeightInitializer.cs" />
+    <Compile Remove="Backup\IErrorObserver.cs" />
+    <Compile Remove="Backup\IWeightInitializer.cs" />
+    <Compile Remove="Backup\Properties\AssemblyInfo.cs" />
+    <Compile Remove="Backup\RBM.cs" />
+    <Compile Remove="Backup\RBMBinaryLayer.cs" />
+    <Compile Remove="Backup\RBMGaussianLayer.cs" />
+    <Compile Remove="Backup\RBMLayer.cs" />
+    <Compile Remove="Backup\RBMLearningRate.cs" />
+    <Compile Remove="Backup\RBMTrainer.cs" />
+    <Compile Remove="Backup\RBMWeightSet.cs" />
+    <Compile Remove="Backup\Utility.cs" />
+    <Compile Remove="Backup\ZeroWeightInitializer.cs" />
+    <Compile Remove="Code\ScienceFair2008CSharpCode\BackPropMLP2\ILayer.cs" />
+    <Compile Remove="Code\ScienceFair2008CSharpCode\BackPropMLP2\Network.cs" />
+    <Compile Remove="Code\ScienceFair2008CSharpCode\BackPropMLP2\Properties\AssemblyInfo.cs" />
+    <Compile Remove="Code\ScienceFair2008CSharpCode\BackPropMLP2\SigmoidLayer.cs" />
+    <Compile Remove="Code\ScienceFair2008CSharpCode\BackPropMLP2\TanhLayer.cs" />
+    <Compile Remove="Code\ScienceFair2008CSharpCode\BackPropMLP2\Utility.cs" />
+    <Compile Remove="Code\ScienceFair2008CSharpCode\Backup\Flickr\FlickrAutoencoder.cs" />
+    <Compile Remove="Code\ScienceFair2008CSharpCode\Backup\Flickr\FlickrInputProvider.cs" />
+    <Compile Remove="Code\ScienceFair2008CSharpCode\Backup\MNIST\AutoencoderBasedDiscrimination.cs" />
+    <Compile Remove="Code\ScienceFair2008CSharpCode\Backup\MNIST\AutoencoderInputProvider.cs" />
+    <Compile Remove="Code\ScienceFair2008CSharpCode\Backup\MNIST\AutoencoderToMLP.cs" />
+    <Compile Remove="Code\ScienceFair2008CSharpCode\Backup\MNIST\DiscriminativeInputProvider.cs" />
+    <Compile Remove="Code\ScienceFair2008CSharpCode\Backup\MNIST\DiscriminativeMLP.cs" />
+    <Compile Remove="Code\ScienceFair2008CSharpCode\Backup\MNIST\DiscriminativeProgramBase.cs" />
+    <Compile Remove="Code\ScienceFair2008CSharpCode\Backup\MNIST\GenerativeAutoencoder.cs" />
+    <Compile Remove="Code\ScienceFair2008CSharpCode\Backup\MNIST\GenerativeInputProvider.cs" />
+    <Compile Remove="Code\ScienceFair2008CSharpCode\Backup\MNIST\LabelReader.cs" />
+    <Compile Remove="Code\ScienceFair2008CSharpCode\Backup\MNIST\MNISTAutoencoderCompress.cs" />
+    <Compile Remove="Code\ScienceFair2008CSharpCode\Backup\MNIST\MNISTCamera.cs" />
+    <Compile Remove="Code\ScienceFair2008CSharpCode\Backup\MNIST\MNISTInputProvider.cs" />
+    <Compile Remove="Code\ScienceFair2008CSharpCode\Backup\MNIST\MNISTProgramBase.cs" />
+    <Compile Remove="Code\ScienceFair2008CSharpCode\Backup\Program.cs" />
+    <Compile Remove="Code\ScienceFair2008CSharpCode\Backup\ProgramBase.cs" />
+    <Compile Remove="Code\ScienceFair2008CSharpCode\Backup\Properties\AssemblyInfo.cs" />
+    <Compile Remove="Code\ScienceFair2008CSharpCode\Flickr\FlickrAutoencoder.cs" />
+    <Compile Remove="Code\ScienceFair2008CSharpCode\Flickr\FlickrInputProvider.cs" />
+    <Compile Remove="Code\ScienceFair2008CSharpCode\MNIST\AutoencoderBasedDiscrimination.cs" />
+    <Compile Remove="Code\ScienceFair2008CSharpCode\MNIST\AutoencoderInputProvider.cs" />
+    <Compile Remove="Code\ScienceFair2008CSharpCode\MNIST\AutoencoderToMLP.cs" />
+    <Compile Remove="Code\ScienceFair2008CSharpCode\MNIST\DiscriminativeInputProvider.cs" />
+    <Compile Remove="Code\ScienceFair2008CSharpCode\MNIST\DiscriminativeMLP.cs" />
+    <Compile Remove="Code\ScienceFair2008CSharpCode\MNIST\DiscriminativeProgramBase.cs" />
+    <Compile Remove="Code\ScienceFair2008CSharpCode\MNIST\GenerativeAutoencoder.cs" />
+    <Compile Remove="Code\ScienceFair2008CSharpCode\MNIST\GenerativeInputProvider.cs" />
+    <Compile Remove="Code\ScienceFair2008CSharpCode\MNIST\LabelReader.cs" />
+    <Compile Remove="Code\ScienceFair2008CSharpCode\MNIST\MNISTAutoencoderCompress.cs" />
+    <Compile Remove="Code\ScienceFair2008CSharpCode\MNIST\MNISTCamera.cs" />
+    <Compile Remove="Code\ScienceFair2008CSharpCode\MNIST\MNISTInputProvider.cs" />
+    <Compile Remove="Code\ScienceFair2008CSharpCode\MNIST\MNISTProgramBase.cs" />
+    <Compile Remove="Code\ScienceFair2008CSharpCode\Program.cs" />
+    <Compile Remove="Code\ScienceFair2008CSharpCode\ProgramBase.cs" />
+    <Compile Remove="Code\ScienceFair2008CSharpCode\Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.DotNet.UpgradeAssistant.Extensions.Default.Analyzers" Version="0.4.410601">
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+  </ItemGroup>
+</Project>
