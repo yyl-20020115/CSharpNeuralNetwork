@@ -3,16 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
+using DTRFSample.Properties;
+using SharpLearning.Containers.Extensions;
+using SharpLearning.InputOutput.Csv;
+using SharpLearning.Metrics.Regression;
+using SharpLearning.RandomForest.Learners;
 
 namespace DTRFSample
 {
-    using System.IO;
-    using Properties;
-    using SharpLearning.Containers.Extensions;
-    using SharpLearning.InputOutput.Csv;
-    using SharpLearning.Metrics.Regression;
-    using SharpLearning.RandomForest.Learners;
-
     class Program
     {
         static void Main(string[] args)

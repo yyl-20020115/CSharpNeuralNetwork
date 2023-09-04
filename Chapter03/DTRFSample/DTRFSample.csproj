@@ -12,16 +12,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\src\SharpLearning.Common.Interfaces\SharpLearning.Common.Interfaces.csproj" />
-    <ProjectReference Include="..\src\SharpLearning.Containers\SharpLearning.Containers.csproj" />
-    <ProjectReference Include="..\src\SharpLearning.CrossValidation\SharpLearning.CrossValidation.csproj" />
-    <ProjectReference Include="..\src\SharpLearning.DecisionTrees\SharpLearning.DecisionTrees.csproj" />
-    <ProjectReference Include="..\src\SharpLearning.InputOutput\SharpLearning.InputOutput.csproj" />
-    <ProjectReference Include="..\src\SharpLearning.Metrics\SharpLearning.Metrics.csproj" />
-    <ProjectReference Include="..\src\SharpLearning.Optimization\SharpLearning.Optimization.csproj" />
-    <ProjectReference Include="..\src\SharpLearning.RandomForest\SharpLearning.RandomForest.csproj" />
-  </ItemGroup>
-  <ItemGroup>
     <None Update="Resources\Glass.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -34,6 +24,16 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
+    <PackageReference Include="SharpLearning.Common.Interfaces" Version="0.31.8" />
+    <PackageReference Include="SharpLearning.Containers" Version="0.31.8" />
+    <PackageReference Include="SharpLearning.CrossValidation" Version="0.31.8" />
+    <PackageReference Include="SharpLearning.DecisionTrees" Version="0.31.8" />
+    <PackageReference Include="SharpLearning.GradientBoost" Version="0.31.8" />
+    <PackageReference Include="SharpLearning.InputOutput" Version="0.31.8" />
+    <PackageReference Include="SharpLearning.Metrics" Version="0.31.8" />
+    <PackageReference Include="SharpLearning.Neural" Version="0.31.8" />
+    <PackageReference Include="SharpLearning.Optimization" Version="0.31.8" />
+    <PackageReference Include="SharpLearning.RandomForest" Version="0.31.8" />
     <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
     <PackageReference Include="Microsoft.DotNet.UpgradeAssistant.Extensions.Default.Analyzers" Version="0.4.410601">
       <PrivateAssets>all</PrivateAssets>
