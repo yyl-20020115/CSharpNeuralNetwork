@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using System.IO;
 using System.Linq;
-using NeuralNetwork.NetworkModels;
 using Newtonsoft.Json;
+using NeuralNetwork.NetworkModels;
 
 namespace NeuralNetwork.Helpers;
 
@@ -79,7 +79,7 @@ public static class ImportHelper
 		//Synapses
 		foreach (var syn in dn.Synapses)
 		{
-			var synapse = new Synapse { Id = syn.Id };
+			var synapse = new Synapse(syn.Id);
 			var inputNeuron = allNeurons.First(x => x.Id == syn.InputNeuronId);
 			var outputNeuron = allNeurons.First(x => x.Id == syn.OutputNeuronId);
 			synapse.InputNeuron = inputNeuron;
@@ -111,24 +111,19 @@ public static class ImportHelper
 	{
 		try
 		{
-			var dialog = new OpenFileDialog
+			using var dialog = new OpenFileDialog
 			{
 				Multiselect = false,
 				Title = "Open Network File",
 				Filter = "Text File|*.txt;"
 			};
 
-			using (dialog)
-			{
-				if (dialog.ShowDialog() != DialogResult.OK) return null;
+			if (dialog.ShowDialog() != DialogResult.OK) return null;
 
-				using (var file = File.OpenText(dialog.FileName))
-				{
-					return JsonConvert.DeserializeObject<HelperNetwork>(file.ReadToEnd());
-				}
-			}
-		}
-		catch (Exception)
+            using var file = File.OpenText(dialog.FileName);
+            return JsonConvert.DeserializeObject<HelperNetwork>(file.ReadToEnd());
+        }
+        catch (Exception)
 		{
 			return null;
 		}

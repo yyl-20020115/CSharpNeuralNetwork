@@ -8,15 +8,13 @@ namespace NeuralNetwork.NetworkModels;
 /// <summary>   A neuron. </summary>
 public class Neuron
 {
-    #region -- Properties --
-
     ////////////////////////////////////////////////////////////////////////////////////////////////////
     /// <summary>   Gets or sets the identifier. </summary>
     ///
     /// <value> The identifier. </value>
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public Guid Id { get; set; }
+    public Guid Id;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
     /// <summary>   Gets or sets the input synapses. </summary>
@@ -24,7 +22,7 @@ public class Neuron
     /// <value> The input synapses. </value>
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public List<Synapse> InputSynapses { get; set; }
+    public List<Synapse> InputSynapses = new();
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
     /// <summary>   Gets or sets the output synapses. </summary>
@@ -32,7 +30,7 @@ public class Neuron
     /// <value> The output synapses. </value>
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public List<Synapse> OutputSynapses { get; set; }
+    public List<Synapse> OutputSynapses = new();
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
     /// <summary>   Gets or sets the bias. </summary>
@@ -40,7 +38,7 @@ public class Neuron
     /// <value> The bias. </value>
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public double Bias { get; set; }
+    public double Bias;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
     /// <summary>   Gets or sets the bias delta. </summary>
@@ -48,7 +46,7 @@ public class Neuron
     /// <value> The bias delta. </value>
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public double BiasDelta { get; set; }
+    public double BiasDelta;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
     /// <summary>   Gets or sets the gradient. </summary>
@@ -56,7 +54,7 @@ public class Neuron
     /// <value> The gradient. </value>
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public double Gradient { get; set; }
+    public double Gradient;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
     /// <summary>   Gets or sets the value. </summary>
@@ -64,7 +62,7 @@ public class Neuron
     /// <value> The value. </value>
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public double Value { get; set; }
+    public double Value;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
     /// <summary>   Gets or sets a value indicating whether this object is mirror. </summary>
@@ -72,7 +70,7 @@ public class Neuron
     /// <value> True if this object is mirror, false if not. </value>
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public bool IsMirror { get; set; }
+    public bool IsMirror;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
     /// <summary>   Gets or sets a value indicating whether this object is canonical. </summary>
@@ -80,10 +78,7 @@ public class Neuron
     /// <value> True if this object is canonical, false if not. </value>
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public bool IsCanonical { get; set; }
-    #endregion
-
-    #region -- Constructors --
+    public bool IsCanonical;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
     /// <summary>
@@ -94,8 +89,6 @@ public class Neuron
     public Neuron()
     {
         Id = Guid.NewGuid();
-        InputSynapses = new ();
-        OutputSynapses = new ();
         Bias = Network.GetRandom();
     }
 
@@ -107,7 +100,8 @@ public class Neuron
     /// <param name="inputNeurons"> The input neurons. </param>
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public Neuron(IEnumerable<Neuron> inputNeurons) : this()
+    public Neuron(IEnumerable<Neuron> inputNeurons) 
+        : this()
     {
         //Ensure.That(inputNeurons).IsNotNull();
 
@@ -118,9 +112,6 @@ public class Neuron
             InputSynapses?.Add(synapse);
         }
     }
-    #endregion
-
-    #region -- Values & Weights --
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
     /// <summary>   Calculates the value. </summary>
@@ -128,10 +119,8 @@ public class Neuron
     /// <returns>   The calculated value. </returns>
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public virtual double CalculateValue()
-    {
-        return Value = Sigmoid.Output(InputSynapses.Sum(a => a.Weight * a.InputNeuron.Value) + Bias);
-    }
+    public virtual double CalculateValue() 
+        => Value = Sigmoid.Output(InputSynapses.Sum(a => a.Weight * a.InputNeuron.Value) + Bias);
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
     /// <summary>   Calculates the error. </summary>
@@ -141,10 +130,8 @@ public class Neuron
     /// <returns>   The calculated error. </returns>
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public double CalculateError(double target)
-    {
-        return target - Value;
-    }
+    public double CalculateError(double target) 
+        => target - Value;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
     /// <summary>   Calculates the gradient. </summary>
@@ -154,13 +141,9 @@ public class Neuron
     /// <returns>   The calculated gradient. </returns>
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public double CalculateGradient(double? target = null)
-    {
-        if (target == null)
-            return Gradient = OutputSynapses.Sum(a => a.OutputNeuron.Gradient * a.Weight) * Sigmoid.Derivative(Value);
-
-        return Gradient = CalculateError(target.Value) * Sigmoid.Derivative(Value);
-    }
+    public double CalculateGradient(double? target = null) => target == null
+            ? (Gradient = OutputSynapses.Sum(a => a.OutputNeuron.Gradient * a.Weight) * Sigmoid.Derivative(Value))
+            : (Gradient = CalculateError(target.Value) * Sigmoid.Derivative(Value));
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
     /// <summary>   Updates the weights. </summary>
@@ -182,5 +165,4 @@ public class Neuron
             synapse.Weight += synapse.WeightDelta + momentum * prevDelta;
         }
     }
-    #endregion
 }

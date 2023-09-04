@@ -3,7 +3,6 @@
 /// <summary>   A nn data set. </summary>
 public class NNDataSet
 {
-    #region -- Properties --
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
     /// <summary>   Gets or sets the values. </summary>
@@ -11,7 +10,7 @@ public class NNDataSet
     /// <value> The values. </value>
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public double[] Values { get; set; }
+    public readonly double[] Values;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
     /// <summary>   Gets or sets the targets. </summary>
@@ -19,10 +18,8 @@ public class NNDataSet
     /// <value> The targets. </value>
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public double[] Targets { get; set; }
-    #endregion
+    public readonly double[] Targets;
 
-    #region -- Constructor --
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
     /// <summary>
@@ -38,5 +35,4 @@ public class NNDataSet
         Values = values;
         Targets = targets;
     }
-    #endregion
 }

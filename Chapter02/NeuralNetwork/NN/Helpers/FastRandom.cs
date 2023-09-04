@@ -40,11 +40,11 @@ namespace NeuralNetwork.Helpers;
 public class FastRandom
 {
     // The +1 ensures NextDouble doesn't generate 1.0
-    const double REAL_UNIT_INT = 1.0 / ((double)int.MaxValue + 1.0);
-    const double REAL_UNIT_UINT = 1.0 / ((double)uint.MaxValue + 1.0);
-    const uint Y = 842502087, Z = 3579807591, W = 273326509;
+    public const double REAL_UNIT_INT = 1.0 / ((double)int.MaxValue + 1.0);
+    public const double REAL_UNIT_UINT = 1.0 / ((double)uint.MaxValue + 1.0);
+    public const uint Y = 842502087, Z = 3579807591, W = 273326509;
 
-    uint x, y, z, w;
+    public uint x, y, z, w;
 
     #region Constructors
 

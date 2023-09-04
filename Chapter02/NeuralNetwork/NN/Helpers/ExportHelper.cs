@@ -10,35 +10,32 @@ public static class ExportHelper
 {
     public static void ExportNetwork(Network network)
     {
-        var dn = GetHelperNetwork(network);
+        var helperNetwork = GetHelperNetwork(network);
 
-        var dialog = new SaveFileDialog
+        using var dialog = new SaveFileDialog
         {
             Title = "Save Network File",
             Filter = "Text File|*.txt;"
         };
 
-        using (dialog)
+        if (dialog.ShowDialog() == DialogResult.OK)
         {
-            if (dialog.ShowDialog() != DialogResult.OK) return;
             using var file = File.CreateText(dialog.FileName);
             var serializer = new JsonSerializer { Formatting = Formatting.Indented };
-            serializer.Serialize(file, dn);
+            serializer.Serialize(file, helperNetwork);
         }
     }
 
     public static void ExportDatasets(List<NNDataSet> datasets)
     {
-        var dialog = new SaveFileDialog
+        using var dialog = new SaveFileDialog
         {
             Title = "Save Dataset File",
             Filter = "Text File|*.txt;"
         };
 
-        using (dialog)
+        if (dialog.ShowDialog() == DialogResult.OK)
         {
-            if (dialog.ShowDialog() != DialogResult.OK)
-                return;
             using var file = File.CreateText(dialog.FileName);
             var serializer = new JsonSerializer { Formatting = Formatting.Indented };
             serializer.Serialize(file, datasets);
@@ -51,7 +48,7 @@ public static class ExportHelper
         //Ensure.That(network.InputLayer).IsNotNull();
         //Ensure.That(network.HiddenLayers).IsNotNull();
 
-        var hn = new HelperNetwork
+        var helperNetwork = new HelperNetwork
         {
             LearningRate = network.LearningRate,
             Momentum = network.Momentum
@@ -60,7 +57,7 @@ public static class ExportHelper
         //Input Layer
         foreach (var n in network.InputLayer)
         {
-            var neuron = new HelperNeuron
+            var neuron = new NeuronData
             {
                 Id = n.Id,
                 Bias = n.Bias,
@@ -69,11 +66,11 @@ public static class ExportHelper
                 Value = n.Value
             };
 
-            hn.InputLayer?.Add(neuron);
+            helperNetwork.InputLayer?.Add(neuron);
 
             foreach (var synapse in n.OutputSynapses)
             {
-                var syn = new HelperSynapse
+                var syn = new SynapseData
                 {
                     Id = synapse.Id,
                     OutputNeuronId = synapse.OutputNeuron.Id,
@@ -82,31 +79,31 @@ public static class ExportHelper
                     WeightDelta = synapse.WeightDelta
                 };
 
-                hn.Synapses?.Add(syn);
+                helperNetwork.Synapses?.Add(syn);
             }
         }
 
         //Hidden Layer
-        foreach (var l in network.HiddenLayers)
+        foreach (var _layer in network.HiddenLayers)
         {
-            var layer = new List<HelperNeuron>();
+            var layer = new List<NeuronData>();
 
-            foreach (var n in l)
+            foreach (var _neuron in _layer)
             {
-                var neuron = new HelperNeuron
+                var neuron = new NeuronData
                 {
-                    Id = n.Id,
-                    Bias = n.Bias,
-                    BiasDelta = n.BiasDelta,
-                    Gradient = n.Gradient,
-                    Value = n.Value
+                    Id = _neuron.Id,
+                    Bias = _neuron.Bias,
+                    BiasDelta = _neuron.BiasDelta,
+                    Gradient = _neuron.Gradient,
+                    Value = _neuron.Value
                 };
 
                 layer.Add(neuron);
 
-                foreach (var synapse in n.OutputSynapses)
+                foreach (var synapse in _neuron.OutputSynapses)
                 {
-                    var syn = new HelperSynapse
+                    var syn = new SynapseData
                     {
                         Id = synapse.Id,
                         OutputNeuronId = synapse.OutputNeuron.Id,
@@ -115,30 +112,30 @@ public static class ExportHelper
                         WeightDelta = synapse.WeightDelta
                     };
 
-                    hn.Synapses?.Add(syn);
+                    helperNetwork.Synapses?.Add(syn);
                 }
             }
 
-            hn.HiddenLayers?.Add(layer);
+            helperNetwork.HiddenLayers?.Add(layer);
         }
 
         //Output Layer
-        foreach (var n in network.OutputLayer)
+        foreach (var _neuron in network.OutputLayer)
         {
-            var neuron = new HelperNeuron
+            var neuron = new NeuronData
             {
-                Id = n.Id,
-                Bias = n.Bias,
-                BiasDelta = n.BiasDelta,
-                Gradient = n.Gradient,
-                Value = n.Value
+                Id = _neuron.Id,
+                Bias = _neuron.Bias,
+                BiasDelta = _neuron.BiasDelta,
+                Gradient = _neuron.Gradient,
+                Value = _neuron.Value
             };
 
-            hn.OutputLayer?.Add(neuron);
+            helperNetwork.OutputLayer?.Add(neuron);
 
-            foreach (var synapse in n.OutputSynapses)
+            foreach (var synapse in _neuron.OutputSynapses)
             {
-                var syn = new HelperSynapse
+                var syn = new SynapseData
                 {
                     Id = synapse.Id,
                     OutputNeuronId = synapse.OutputNeuron.Id,
@@ -147,10 +144,10 @@ public static class ExportHelper
                     WeightDelta = synapse.WeightDelta
                 };
 
-                hn.Synapses?.Add(syn);
+                helperNetwork.Synapses?.Add(syn);
             }
         }
 
-        return hn;
+        return helperNetwork;
     }
 }

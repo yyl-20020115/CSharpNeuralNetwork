@@ -4,10 +4,10 @@ namespace NeuralNetwork;
 
 public class Program
 {
-    static void Main(string[] args)
+    public static void Main(string[] _)
     {
-        var mgr = new NNManager();
-        mgr.SetupNetwork()
+        var manager = new NNManager();
+        manager.SetupNetwork()
             .GetTrainingDataFromUser()
             .TrainNetworkToMinimum()
             .TestNetwork();
@@ -15,7 +15,7 @@ public class Program
         Console.WriteLine("Press any key to train network for maximum");
         Console.ReadKey();
 
-        mgr.SetupNetwork()
+        manager.SetupNetwork()
             .GetTrainingDataFromUser()
             .TrainNetworkToMaximum()
             .TestNetwork();

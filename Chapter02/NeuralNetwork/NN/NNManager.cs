@@ -11,7 +11,6 @@ namespace NeuralNetwork;
 /// <summary>   Manager for nns. </summary>
 public class NNManager
 {
-    #region -- Variables --
     /// <summary>   Number of input parameters. </summary>
     private int _numInputParameters;
     /// <summary>   Number of hidden layers. </summary>
@@ -23,16 +22,9 @@ public class NNManager
     /// <summary>   The network. </summary>
     private Network _network;
     /// <summary>   Sets the data belongs to. </summary>
-    private List<NNDataSet> _dataSets;
-    #endregion
+    private List<NNDataSet> _dataSets = new();
 
-    #region -- Main --
-    /// <summary>   Main entry-point for this application. </summary>
-    [STAThread]
-    private void Main()
-    {
-    }
-    #endregion
+
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
     /// <summary>   Sets up the network. </summary>
@@ -417,7 +409,7 @@ public class NNManager
     /// <returns>   The line. </returns>
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public string GetLine()
+    public static string GetLine()
     {
         var line = Console.ReadLine();
         return line?.Trim() ?? string.Empty;
@@ -433,7 +425,7 @@ public class NNManager
     /// <returns>   The input. </returns>
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public int? GetInput(string message, int min, int max)
+    public static int? GetInput(string message, int min, int max)
     {
         Console.Write(message);
         var num = GetNumber();
@@ -458,7 +450,7 @@ public class NNManager
     /// <returns>   The double. </returns>
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public double GetDouble(string message, double min, double max)
+    public static double GetDouble(string message, double min, double max)
     {
         Console.Write(message);
         var num = GetDouble();
@@ -483,7 +475,7 @@ public class NNManager
     /// <returns>   An array of int. </returns>
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public int[] GetArrayInput(string message, int min, int numToGet)
+    public static int[] GetArrayInput(string message, int min, int numToGet)
     {
         var nums = new int[numToGet];
 
@@ -510,7 +502,7 @@ public class NNManager
     /// <returns>   The number. </returns>
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public int? GetNumber()
+    public static int? GetNumber()
     {
         var line = GetLine();
 
@@ -526,7 +518,7 @@ public class NNManager
     /// <returns>   The double. </returns>
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public double GetDouble()
+    public static double GetDouble()
     {
         var line = GetLine();
         return line != null && double.TryParse(line, out var num) ? num : 0;
@@ -538,7 +530,7 @@ public class NNManager
     /// <param name="numNewLines">  (Optional) Number of new lines. </param>
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public void PrintNewLine(int numNewLines = 1)
+    public static void PrintNewLine(int numNewLines = 1)
     {
         for (var i = 0; i < numNewLines; i++)
             Console.WriteLine();
@@ -550,7 +542,7 @@ public class NNManager
     /// <param name="numUnderlines">    Number of underlines. </param>
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public void PrintUnderline(int numUnderlines)
+    public static void PrintUnderline(int numUnderlines)
     {
         for (var i = 0; i < numUnderlines; i++)
             Console.Write("-", Color.Yellow);
@@ -563,14 +555,14 @@ public class NNManager
     /// <param name="error">    The error. </param>
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public void WriteError(string error)
+    public static void WriteError(string error)
     {
         Console.WriteLine(error, Color.Red);
         Exit();
     }
 
     /// <summary>   Exits this object. </summary>
-    public void Exit()
+    public static void Exit()
     {
         Console.WriteLine("Exiting...", Color.Yellow);
         Console.ReadLine();

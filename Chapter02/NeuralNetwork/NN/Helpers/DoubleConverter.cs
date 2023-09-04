@@ -2,7 +2,7 @@
 
 namespace NeuralNetwork.Helpers;
 
-public class DoubleConverter
+public static class DoubleConverter
 {
     /// <summary>
     /// Converts the given double to a string representation of its

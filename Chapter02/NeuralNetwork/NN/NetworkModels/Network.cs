@@ -5,11 +5,19 @@ using System.Linq;
 namespace NeuralNetwork.NetworkModels;
 
 using Helpers;
+/// <summary>   Values that represent training types. </summary>
+public enum TrainingType
+{
+    /// <summary>   An enum constant representing the epoch option. </summary>
+    Epoch,
+
+    /// <summary>   An enum constant representing the minimum error option. </summary>
+    MinimumError
+}
 
 /// <summary>   A network. </summary>
 public class Network
 {
-    #region -- Properties --
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
     /// <summary>   Gets or sets the learning rate. </summary>
@@ -17,7 +25,7 @@ public class Network
     /// <value> The learning rate. </value>
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public double LearningRate { get; set; }
+    public double LearningRate;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
     /// <summary>   Gets or sets the momentum. </summary>
@@ -25,7 +33,7 @@ public class Network
     /// <value> The momentum. </value>
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public double Momentum { get; set; }
+    public double Momentum;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
     /// <summary>   Gets or sets the input layer. </summary>
@@ -33,7 +41,7 @@ public class Network
     /// <value> The input layer. </value>
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public List<Neuron> InputLayer { get; set; }
+    public List<Neuron> InputLayer;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
     /// <summary>   Gets or sets the hidden layers. </summary>
@@ -41,7 +49,7 @@ public class Network
     /// <value> The hidden layers. </value>
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public List<List<Neuron>> HiddenLayers { get; set; }
+    public List<List<Neuron>> HiddenLayers;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
     /// <summary>   Gets or sets the output layer. </summary>
@@ -49,7 +57,7 @@ public class Network
     /// <value> The output layer. </value>
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public List<Neuron> OutputLayer { get; set; }
+    public List<Neuron> OutputLayer;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
     /// <summary>   Gets or sets the mirror layer. </summary>
@@ -57,7 +65,7 @@ public class Network
     /// <value> The mirror layer. </value>
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public List<Neuron> MirrorLayer { get; set; }
+    public List<Neuron> MirrorLayer;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
     /// <summary>   Gets or sets the canonical layer. </summary>
@@ -65,15 +73,9 @@ public class Network
     /// <value> The canonical layer. </value>
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public List<Neuron> CanonicalLayer { get; set; }
-    #endregion
-
-    #region -- Globals --
+    public List<Neuron> CanonicalLayer;
     /// <summary>   The random. </summary>
-    private static readonly FastRandom Random = new FastRandom();
-    #endregion
-
-    #region -- Constructor --
+    private static readonly FastRandom Random = new();
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
     /// <summary>
@@ -85,9 +87,9 @@ public class Network
     {
         LearningRate = 0;
         Momentum = 0;
-        InputLayer = new List<Neuron>();
-        HiddenLayers = new List<List<Neuron>>();
-        OutputLayer = new List<Neuron>();
+        InputLayer = new ();
+        HiddenLayers = new ();
+        OutputLayer = new ();
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -106,16 +108,16 @@ public class Network
     {
         LearningRate = learnRate ?? .434;
         Momentum = momentum ?? .912;
-        InputLayer = new List<Neuron>();
-        HiddenLayers = new List<List<Neuron>>();
-        OutputLayer = new List<Neuron>();
+        InputLayer = new ();
+        HiddenLayers = new ();
+        OutputLayer = new ();
 
         for (var i = 0; i < inputSize; i++)
-            InputLayer.Add(new Neuron());
+            InputLayer.Add(new ());
 
         var firstHiddenLayer = new List<Neuron>();
         for (var i = 0; i < hiddenSizes[0]; i++)
-            firstHiddenLayer.Add(new Neuron(InputLayer));
+            firstHiddenLayer.Add(new (InputLayer));
 
         HiddenLayers.Add(firstHiddenLayer);
 
@@ -123,16 +125,13 @@ public class Network
         {
             var hiddenLayer = new List<Neuron>();
             for (var j = 0; j < hiddenSizes[i]; j++)
-                hiddenLayer.Add(new Neuron(HiddenLayers[i - 1]));
+                hiddenLayer.Add(new (HiddenLayers[i - 1]));
             HiddenLayers.Add(hiddenLayer);
         }
 
         for (var i = 0; i < outputSize; i++)
-            OutputLayer.Add(new Neuron(HiddenLayers.Last()));
+            OutputLayer.Add(new (HiddenLayers.Last()));
     }
-    #endregion
-
-    #region -- Training --
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
     /// <summary>   Trains. </summary>
@@ -237,9 +236,6 @@ public class Network
         var i = 0;
         return OutputLayer.Sum(a => Math.Abs(a.CalculateError(targets[i++])));
     }
-    #endregion
-
-    #region -- Helpers --
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
     /// <summary>   Gets the random. </summary>
@@ -247,18 +243,6 @@ public class Network
     /// <returns>   The random. </returns>
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public static double GetRandom() => 2 * Random.NextDouble() - 1;
-    #endregion
+    public static double GetRandom() 
+        => 2 * Random.NextDouble() - 1;
 }
-
-#region -- Enum --
-/// <summary>   Values that represent training types. </summary>
-public enum TrainingType
-{
-    /// <summary>   An enum constant representing the epoch option. </summary>
-    Epoch,
-
-    /// <summary>   An enum constant representing the minimum error option. </summary>
-    MinimumError
-}
-#endregion

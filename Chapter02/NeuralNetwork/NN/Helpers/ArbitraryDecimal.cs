@@ -4,21 +4,21 @@ using System.Globalization;
 namespace NeuralNetwork.Helpers;
 
 /// <summary>Private class used for manipulating
-class ArbitraryDecimal
+public class ArbitraryDecimal
 {
     /// <summary>Digits in the decimal expansion, one byte per digit </summary> 
-    byte[] digits;
+    private byte[] digits;
 
     /// <summary>How many digits are *after* the decimal point</summary>
-    int decimalPoint = 0;
+    private int decimalPoint = 0;
 
     /// <summary> 
     /// Constructs an arbitrary decimal expansion from the given long.
     /// The long must not be negative.
     /// </summary>
-    internal ArbitraryDecimal(long x)
+    public ArbitraryDecimal(long x)
     {
-        string tmp = x.ToString(CultureInfo.InvariantCulture);
+        var tmp = x.ToString(CultureInfo.InvariantCulture);
         digits = new byte[tmp.Length];
         for (int i = 0; i < tmp.Length; i++)
             digits[i] = (byte)(tmp[i] - '0');
@@ -29,9 +29,9 @@ class ArbitraryDecimal
     /// Multiplies the current expansion by the given amount, which should
     /// only be 2 or 5.
     /// </summary>
-    internal void MultiplyBy(int amount)
+    public void MultiplyBy(int amount)
     {
-        byte[] result = new byte[digits.Length + 1];
+        var result = new byte[digits.Length + 1];
         for (int i = digits.Length - 1; i >= 0; i--)
         {
             int resultDigit = digits[i] * amount + result[i + 1];
@@ -55,15 +55,12 @@ class ArbitraryDecimal
     /// decimal place) and a positive value makes the decimal
     /// expansion smaller.
     /// </summary>
-    internal void Shift(int amount)
-    {
-        decimalPoint += amount;
-    }
+    public void Shift(int amount) => decimalPoint += amount;
 
     /// <summary>
     /// Removes leading/trailing zeroes from the expansion.
     /// </summary>
-    internal void Normalize()
+    public void Normalize()
     {
         int first;
         for (first = 0; first < digits.Length; first++)
@@ -77,7 +74,7 @@ class ArbitraryDecimal
         if (first == 0 && last == digits.Length - 1)
             return;
 
-        byte[] tmp = new byte[last - first + 1];
+        var tmp = new byte[last - first + 1];
         for (int i = 0; i < tmp.Length; i++)
             tmp[i] = digits[i + first];
 
@@ -90,7 +87,7 @@ class ArbitraryDecimal
     /// </summary>
     public override string ToString()
     {
-        char[] digitString = new char[digits.Length];
+        var digitString = new char[digits.Length];
         for (int i = 0; i < digits.Length; i++)
             digitString[i] = (char)(digits[i] + '0');
 
