@@ -6,8 +6,5 @@ public class MnistEntry
 
     public int Label;
 
-    public override string ToString()
-    {
-        return "Label: " + this.Label;
-    }
+    public override string ToString() => "Label: " + Label;
 }

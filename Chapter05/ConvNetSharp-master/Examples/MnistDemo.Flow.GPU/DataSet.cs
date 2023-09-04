@@ -7,7 +7,7 @@ namespace MnistDemo.GPU;
 
 public class DataSet
 {
-    private readonly Random _random = new Random(RandomUtilities.Seed);
+    private readonly Random _random = new (RandomUtilities.Seed);
     private readonly List<MnistEntry> _trainImages;
     private int _epochCompleted;
     private int _start;

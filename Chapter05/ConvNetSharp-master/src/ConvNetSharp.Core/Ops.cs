@@ -2,7 +2,7 @@
 using System.Linq.Expressions;
 using System.Reflection;
 
-namespace ConvNetSharp.Core
+namespace ConvNetSharp.Core;
 {
     public class Ops<T> where T : struct, IEquatable<T>
     {
