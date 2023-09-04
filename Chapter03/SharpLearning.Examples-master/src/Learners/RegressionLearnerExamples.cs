@@ -8,143 +8,142 @@ using SharpLearning.DecisionTrees.Models;
 using SharpLearning.Examples.Properties;
 using SharpLearning.InputOutput.Csv;
 
-namespace SharpLearning.Examples.Learners
+namespace SharpLearning.Examples.Learners;
+
+[TestClass]
+public class RegressionLearnerExamples
 {
-    [TestClass]
-    public class RegressionLearnerExamples
+    [TestMethod]
+    public void RegressionLearner_Learn()
     {
-        [TestMethod]
-        public void RegressionLearner_Learn()
+        // Use StreamReader(filepath) when running from filesystem
+        var parser = new CsvParser(() => new StringReader(Resources.winequality_white));
+        var targetName = "quality";
+
+        // read feature matrix
+        var observations = parser.EnumerateRows(c => c != targetName)
+            .ToF64Matrix();
+
+        // read regression targets
+        var targets = parser.EnumerateRows(targetName)
+            .ToF64Vector();
+
+        // create learner
+        var learner = new RegressionDecisionTreeLearner();
+
+        // learns a RegressionDecisionTreeModel
+        var model = learner.Learn(observations, targets);
+    }
+
+    [TestMethod]
+    public void RegressionModel_Predict()
+    {
+        #region learner creation
+
+        // Use StreamReader(filepath) when running from filesystem
+        var parser = new CsvParser(() => new StringReader(Resources.winequality_white));
+        var targetName = "quality";
+
+        // read feature matrix
+        var observations = parser.EnumerateRows(c => c != targetName)
+            .ToF64Matrix();
+
+        // read regression targets
+        var targets = parser.EnumerateRows(targetName)
+            .ToF64Vector();
+
+        // create learner
+        var learner = new RegressionDecisionTreeLearner();
+        #endregion
+
+        // learns a RegressionDecisionTreeModel
+        var model = learner.Learn(observations, targets);
+
+        // predict all observations 
+        var predictions = model.Predict(observations);
+
+        // predict single observation
+        var prediction = model.Predict(observations.Row(0));
+    }
+
+    [TestMethod]
+    public void RegressionModel_FeatureImportance()
+    {
+        #region learner creation
+
+        // Use StreamReader(filepath) when running from filesystem
+        var parser = new CsvParser(() => new StringReader(Resources.winequality_white));
+        var targetName = "quality";
+
+        // read feature matrix
+        var observations = parser.EnumerateRows(c => c != targetName)
+            .ToF64Matrix();
+
+        // read regression targets
+        var targets = parser.EnumerateRows(targetName)
+            .ToF64Vector();
+
+        // create learner
+        var learner = new RegressionDecisionTreeLearner();
+        #endregion
+
+        // learns a RegressionDecisionTreeModel
+        var model = learner.Learn(observations, targets);
+
+        // raw feature importance
+        var rawImportance = model.GetRawVariableImportance();
+
+        // normalized and named feature importance
+        var featureNameToIndex = parser.EnumerateRows(c => c != targetName).First().ColumnNameToIndex;
+        var importance = model.GetVariableImportance(featureNameToIndex);
+
+        // trace normalized importances
+        var importanceCsv = new StringBuilder();
+        importanceCsv.Append("FeatureName;Importance");
+        foreach (var feature in importance)
         {
-            // Use StreamReader(filepath) when running from filesystem
-            var parser = new CsvParser(() => new StringReader(Resources.winequality_white));
-            var targetName = "quality";
-
-            // read feature matrix
-            var observations = parser.EnumerateRows(c => c != targetName)
-                .ToF64Matrix();
-
-            // read regression targets
-            var targets = parser.EnumerateRows(targetName)
-                .ToF64Vector();
-
-            // create learner
-            var learner = new RegressionDecisionTreeLearner();
-
-            // learns a RegressionDecisionTreeModel
-            var model = learner.Learn(observations, targets);
+            importanceCsv.AppendLine();
+            importanceCsv.Append(feature.Key + ";" + feature.Value);
         }
 
-        [TestMethod]
-        public void RegressionModel_Predict()
-        {
-            #region learner creation
+        Trace.WriteLine(importanceCsv);
+    }
 
-            // Use StreamReader(filepath) when running from filesystem
-            var parser = new CsvParser(() => new StringReader(Resources.winequality_white));
-            var targetName = "quality";
+    [TestMethod]
+    public void RegressionModel_Save_Load()
+    {
+        #region learner creation
 
-            // read feature matrix
-            var observations = parser.EnumerateRows(c => c != targetName)
-                .ToF64Matrix();
+        // Use StreamReader(filepath) when running from filesystem
+        var parser = new CsvParser(() => new StringReader(Resources.winequality_white));
+        var targetName = "quality";
 
-            // read regression targets
-            var targets = parser.EnumerateRows(targetName)
-                .ToF64Vector();
+        // read feature matrix
+        var observations = parser.EnumerateRows(c => c != targetName)
+            .ToF64Matrix();
 
-            // create learner
-            var learner = new RegressionDecisionTreeLearner();
-            #endregion
+        // read regression targets
+        var targets = parser.EnumerateRows(targetName)
+            .ToF64Vector();
 
-            // learns a RegressionDecisionTreeModel
-            var model = learner.Learn(observations, targets);
+        // create learner
+        var learner = new RegressionDecisionTreeLearner();
 
-            // predict all observations 
-            var predictions = model.Predict(observations);
+        #endregion
 
-            // predict single observation
-            var prediction = model.Predict(observations.Row(0));
-        }
+        // learns a ClassificationDecisionTreeModel
+        var model = learner.Learn(observations, targets);
 
-        [TestMethod]
-        public void RegressionModel_FeatureImportance()
-        {
-            #region learner creation
+        var writer = new StringWriter();
+        model.Save(() => writer);
 
-            // Use StreamReader(filepath) when running from filesystem
-            var parser = new CsvParser(() => new StringReader(Resources.winequality_white));
-            var targetName = "quality";
+        // save to file 
+        //model.Save(() => new StreamWriter(filePath));
 
-            // read feature matrix
-            var observations = parser.EnumerateRows(c => c != targetName)
-                .ToF64Matrix();
+        var text = writer.ToString();
+        var loadedModel = RegressionDecisionTreeModel.Load(() => new StringReader(text));
 
-            // read regression targets
-            var targets = parser.EnumerateRows(targetName)
-                .ToF64Vector();
-
-            // create learner
-            var learner = new RegressionDecisionTreeLearner();
-            #endregion
-
-            // learns a RegressionDecisionTreeModel
-            var model = learner.Learn(observations, targets);
-
-            // raw feature importance
-            var rawImportance = model.GetRawVariableImportance();
-
-            // normalized and named feature importance
-            var featureNameToIndex = parser.EnumerateRows(c => c != targetName).First().ColumnNameToIndex;
-            var importance = model.GetVariableImportance(featureNameToIndex);
-
-            // trace normalized importances
-            var importanceCsv = new StringBuilder();
-            importanceCsv.Append("FeatureName;Importance");
-            foreach (var feature in importance)
-            {
-                importanceCsv.AppendLine();
-                importanceCsv.Append(feature.Key + ";" + feature.Value);
-            }
-
-            Trace.WriteLine(importanceCsv);
-        }
-
-        [TestMethod]
-        public void RegressionModel_Save_Load()
-        {
-            #region learner creation
-
-            // Use StreamReader(filepath) when running from filesystem
-            var parser = new CsvParser(() => new StringReader(Resources.winequality_white));
-            var targetName = "quality";
-
-            // read feature matrix
-            var observations = parser.EnumerateRows(c => c != targetName)
-                .ToF64Matrix();
-
-            // read regression targets
-            var targets = parser.EnumerateRows(targetName)
-                .ToF64Vector();
-
-            // create learner
-            var learner = new RegressionDecisionTreeLearner();
-
-            #endregion
-
-            // learns a ClassificationDecisionTreeModel
-            var model = learner.Learn(observations, targets);
-
-            var writer = new StringWriter();
-            model.Save(() => writer);
-
-            // save to file 
-            //model.Save(() => new StreamWriter(filePath));
-
-            var text = writer.ToString();
-            var loadedModel = RegressionDecisionTreeModel.Load(() => new StringReader(text));
-
-            // load from file 
-            //RegressionDecisionTreeModel.Load(() => new StreamReader(filePath));
-        }
+        // load from file 
+        //RegressionDecisionTreeModel.Load(() => new StreamReader(filePath));
     }
 }
