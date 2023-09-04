@@ -1,16 +1,15 @@
 ﻿using System;
 
-namespace FlowDemo
+namespace FlowDemo;
+
+public class Program
 {
-    internal class Program
+    [STAThread]
+    private static void Main()
     {
-        [STAThread]
-        private static void Main()
-        {
-            //ExampleCpuSingle.Example1();
-            //ExampleCpuDouble.Example2();
-            //ExampleGpuSingle.Example1();
-            NetExampleSingle.Classify2DDemo();
-        }
+        //ExampleCpuSingle.Example1();
+        //ExampleCpuDouble.Example2();
+        //ExampleGpuSingle.Example1();
+        NetExampleSingle.Classify2DDemo();
     }
 }

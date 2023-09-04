@@ -1,14 +1,10 @@
-namespace MnistDemo.GPU
+namespace MnistDemo.GPU;
+
+public class MnistEntry
 {
-    public class MnistEntry
-    {
-        public byte[] Image { get; set; }
+    public byte[] Image { get; set; }
 
-        public int Label { get; set; }
+    public int Label { get; set; }
 
-        public override string ToString()
-        {
-            return "Label: " + this.Label;
-        }
-    }
+    public override string ToString() => "Label: " + this.Label;
 }

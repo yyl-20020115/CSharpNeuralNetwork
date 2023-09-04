@@ -1,14 +1,13 @@
-namespace FluentMnistDemo
+namespace FluentMnistDemo;
+
+public class MnistEntry
 {
-    public class MnistEntry
+    public byte[] Image;
+
+    public int Label;
+
+    public override string ToString()
     {
-        public byte[] Image { get; set; }
-
-        public int Label { get; set; }
-
-        public override string ToString()
-        {
-            return "Label: " + this.Label;
-        }
+        return "Label: " + this.Label;
     }
 }

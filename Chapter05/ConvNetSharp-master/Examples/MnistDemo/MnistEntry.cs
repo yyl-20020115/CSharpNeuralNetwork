@@ -1,14 +1,10 @@
-namespace MnistDemo
+namespace MnistDemo;
+
+public class MnistEntry
 {
-    public class MnistEntry
-    {
-        public byte[] Image { get; set; }
+    public byte[] Image;
 
-        public int Label { get; set; }
+    public int Label;
 
-        public override string ToString()
-        {
-            return "Label: " + this.Label;
-        }
-    }
+    public override string ToString() => "Label: " + Label;
 }
