@@ -1,38 +1,37 @@
 
-namespace Autoencoders
+namespace Autoencoders;
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+/// <summary>   A zero weight initializer. </summary>
+///
+/// <seealso cref="T:Autoencoders.IWeightInitializer"/>
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+public class ZeroWeightInitializer: IWeightInitializer
 {
     ////////////////////////////////////////////////////////////////////////////////////////////////////
-    /// <summary>   A zero weight initializer. </summary>
+    /// <summary>   Initializes the weight. </summary>
     ///
-    /// <seealso cref="T:Autoencoders.IWeightInitializer"/>
+    /// <returns>   A double. </returns>
+    ///
+    /// <seealso cref="M:Autoencoders.IWeightInitializer.InitializeWeight()"/>
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public class ZeroWeightInitializer: IWeightInitializer
+    public double InitializeWeight()
     {
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
-        /// <summary>   Initializes the weight. </summary>
-        ///
-        /// <returns>   A double. </returns>
-        ///
-        /// <seealso cref="M:Autoencoders.IWeightInitializer.InitializeWeight()"/>
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
+        return 0;
+    }
 
-        public double InitializeWeight()
-        {
-            return 0;
-        }
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+    /// <summary>   Initializes the bias. </summary>
+    ///
+    /// <returns>   A double. </returns>
+    ///
+    /// <seealso cref="M:Autoencoders.IWeightInitializer.InitializeBias()"/>
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
-        /// <summary>   Initializes the bias. </summary>
-        ///
-        /// <returns>   A double. </returns>
-        ///
-        /// <seealso cref="M:Autoencoders.IWeightInitializer.InitializeBias()"/>
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
-
-        public double InitializeBias()
-        {
-            return 0;
-        }
+    public double InitializeBias()
+    {
+        return 0;
     }
 }
